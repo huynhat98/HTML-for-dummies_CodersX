@@ -1,0 +1,48 @@
+<!-- 1. Sử dụng axios để tải nội dung dưới dạng json từ đường link sau về và hiển ra trình duyệt sử dụng document.write
+Link: https://randomuser.me/api/
+Có thể tìm link tới thư viện axios tại: https://cdnjs.com/
+Để thêm thư viện vào jsfiddle, nhấn vào Resources ở cột trái, nhập link vào rồi ấn (+)
+2. Làm tương tự, thay vì dùng axios, hãy dùng fetch (google để biết cách dùng) -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bai Tap 1</title>
+</head>
+<body>
+    
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/3.0.0/fetch.js"></script>
+    <script>
+        axios({
+            method: 'GET',
+            url: 'https://randomuser.me/api/'
+        }).then((result)=>{
+            // console.log(result.data.results[0]);
+            result.data.results.map((result)=>{
+                document.write(JSON.stringify(result))
+            })
+        }).catch((err) => {
+            console.log(err);
+        });
+    </script>
+
+    <script>
+        fetch('https://randomuser.me/api/')
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (myJson) {
+                    console.log(JSON.stringify(myJson));
+                });
+                
+    </script>
+
+
+</body>
+</html>

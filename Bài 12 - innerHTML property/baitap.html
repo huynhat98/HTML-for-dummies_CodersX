@@ -1,0 +1,35 @@
+<!-- 
+- Sử dụng getElementsByTagName() để lấy ra danh sách các <p> có class là 'foo'
+
+- Lặp qua các phần tử và thay đổi nội dung của từng phần tử bằng cách append (thêm vào cuối) một đường link tới coders.tokyo site
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BaiTap</title>
+</head>
+<body>
+    <p class="foo">một</p>
+    <p class="foo">hai</p>
+    <p class="foo">ba</p>
+    <p class="not--foo">ba</p>
+
+    <script>
+        var list = document.getElementsByTagName('p');
+        // console.log(list);
+        for(let i = 0; i<list.length; i++){
+            // console.log(list[i]);
+            var aTag = document.createElement('a');
+            aTag.setAttribute('href', 'coders.tokyo');
+            aTag.innerText = " codersx"
+            if(list[i].className === 'foo'){
+                // console.log(list[i]);
+                list[i].append(aTag)
+            }
+        }
+    </script>
+</body>
+</html>

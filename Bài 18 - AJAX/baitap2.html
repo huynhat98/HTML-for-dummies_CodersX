@@ -1,0 +1,103 @@
+<!-- 1. Tạo một REST api server sử dụng json-server
+2. Đọc documentation của json-server và axios, tìm hiểu các method GET, POST, PUT, PATCH, DELETE
+3. Làm các ví dụ sử dụng axios để gửi các request lên json-server để tạo object mới, update 1 object với dữ liệu mới,
+xoá 1 object
+Lưu ý: đây là một bài khó nếu bạn là beginner, tuy nhiên, khi hiểu được bài này bạn sẽ có thể lên 1 level mới
+(beginner cao cấp).
+Hãy dành 1 ngày để đọc, tìm hiểu, thử. Sau 1 ngày nếu bạn không làm được thì có thể hỏi trên Coders.Tokyo Slack hoặc
+JsLand. -->
+
+
+<!-- https://code.tutsplus.com/vi/tutorials/fake-rest-api-up-and-running-using-json-server--cms-27871?fbclid=IwAR3YXWu7io4zNpx6dOQishuUhuh-jaQ0vUto_M8goC1SVTYMw_VCkiAAqDA -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <input type="text" id="txt_content" placeholder="content">
+    <input type="text" id="txt_id" placeholder="id">
+    <button id="btn_add">add</button>
+    <button id="btn_delete">delete</button>
+    <button id="btn_update">update</button>
+    <ul id="todo-list">
+
+    </ul>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+    <script>
+
+        // GET (Fetch data)
+         axios({
+                method: 'GET',
+                url: 'http://localhost:3000/todos'
+            }).then((result) => {
+                var htmlList = document.getElementById('todo-list');
+                var content = result.data.map(function (item) {
+                    return '<li>' + item.id + ' ' + item.content + '</li>';
+                })
+                htmlList.innerHTML = content.join('');
+            }).catch((err) => {
+                console.log(err);
+            });
+        
+        // POST (add data)
+            btn_add = document.getElementById('btn_add');
+            btn_add.addEventListener('click',()=> {
+                var txt_content = document.getElementById('txt_content');
+                var txt_id = document.getElementById('txt_id');
+                
+            axios({
+                    method: 'POST',
+                    url: 'http://localhost:3000/todos',
+                    data: {
+                        "id": txt_id.value,
+                        "content": txt_content.value
+                    }
+                }).then((result) => {
+                    alert("them thanh cong");
+                    console.log("them thanh cong");
+                }).catch((err) => {
+                    console.log(err);
+                });
+            })
+
+        // Delete 
+        btn_delete = document.getElementById('btn_delete');
+        btn_delete.addEventListener('click',()=> {
+            var txt_id = document.getElementById('txt_id');
+            axios({
+                method: 'DELETE',
+                url: `http://localhost:3000/todos/${txt_id.value}`
+            }).then(()=>{
+                alert('xoa thanh cong')
+            }).catch((err)=>{
+                console.log(err);
+            })
+        })
+
+        // POST (update data)
+        btn_update = document.getElementById('btn_update');
+        btn_update.addEventListener('click',()=>{
+            var txt_content = document.getElementById('txt_content');
+            var txt_id = document.getElementById('txt_id');
+            axios({
+                method: 'PUT',
+                url: `http://localhost:3000/todos/${txt_id.value}`,
+                data:{ 
+                        "content": txt_content.value
+                     }
+            }).then(() => {
+                alert('update thanh cong')
+            }).catch((err) => {
+                console.log(err);
+            })
+        });
+    </script>
+</body>
+</html>

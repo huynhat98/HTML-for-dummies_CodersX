@@ -1,0 +1,26 @@
+<!-- Viết code sao cho khi ấn vào nút `Clear`, chữ trong input sẽ bị xoá
+Kiểm tra bằng cách gõ chữ vào ô tìm kiếm vào ấn `Clear` -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bai Tap 2</title>
+</head>
+<body>
+    <input type="text" id="searchBox" placeholder="Search..." />
+    <button>Search</button>
+    <button onclick="clearInput()">clear</button>
+
+    <script>
+        let searchBox = document.getElementById('searchBox');
+
+        let clearInput = () => {
+                // console.log(searchBox.attributes);
+                searchBox.value = '';
+            }
+
+    </script>
+</body>
+</html>

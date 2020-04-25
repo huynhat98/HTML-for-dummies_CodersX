@@ -1,0 +1,93 @@
+<!-- event's target -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+</head>
+
+<body>
+    <input id="new-item" type="text" />
+    <button id="add-btn">+</button>
+    <ul id="todo-list">
+        <!-- <li>Take shower</li>
+        <li>Have a walk</li>
+        <li>Go to bed</li> -->
+    </ul>
+
+    <script type="text/javascript">
+
+        var storageKey = 'todoList';
+        var dataString = localStorage.getItem(storageKey);
+        var htmlList = document.getElementById('todo-list');
+        var addBtn = document.getElementById('add-btn');
+        // addBtn.onclick = addItem; // chinh la ban chat onclick
+        var todoList;
+        // var todoList = JSON.parse(localStorage.getItem(storageKey));
+
+        if(dataString){
+            todoList = JSON.parse(dataString);
+        } else {
+            todoList = [];
+        }
+
+        htmlList.addEventListener('click', onListClicked);
+        addBtn.addEventListener('click', addItem);
+        // addBtn trigger a click event
+        // a click event is triggered
+        // event listener
+        // co the bat nhieu su kien them nhieu click event cung dc chu khong chi 1 cai onclick
+        addBtn.addEventListener('click',function(){
+            alert("Đã thêm thành công");
+        }) // anynomous 
+
+        function onListClicked(event){
+            // console.log(event);
+            // console.log(event.target);
+            // console.log(event.target.value);
+            var button = event.target;
+            var i = parseInt(button.dataset.id);
+            // console.log(i);
+            todoList.splice(i,1);
+
+            // update
+            // var input = document.getElementById('new-item');
+            // todoList[i] = input.value;
+
+            render();
+            localStorage.setItem(storageKey, JSON.stringify(todoList));
+        }
+
+
+        function addItem() {
+            // console.log('add');
+            // get value of the input
+            var input = document.getElementById('new-item');
+            var newItem = input.value;
+            // add to todoList array
+            todoList.push(newItem);
+            // re-render
+            render();
+            // clear input
+            input.value = '';
+
+            // store data
+            localStorage.setItem(storageKey,JSON.stringify(todoList));
+        }
+
+        function render() {
+            var content = todoList.map(function (item,index) {
+                return '<li>' + item + ' <button data-id="'+index+'">-</button> </li>';
+            })
+            htmlList.innerHTML = content.join('');
+        }
+
+        render();
+
+
+    </script>
+</body>
+
+</html>

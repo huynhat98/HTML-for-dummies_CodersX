@@ -1,0 +1,34 @@
+ <!-- Tạo 1 button mới nằm dưới p
+ Viết code sao cho khi click button đó thì giá trị biến `count` tăng 1 đơn vị và nội dung của `counter` cũng thay đổi
+theo` -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bai Tap 1</title>
+</head>
+<body>
+    <p id="count"></p>
+    <button onclick="add()">add</button>
+
+    <script type="text/javascript">
+
+        let count = 0;
+        let counter = document.getElementById('count');
+
+        let add = () => {
+            count++;
+            render();
+        }
+
+        let render = () => {
+            counter.innerHTML = count;
+        }
+
+        render()
+
+    </script>
+</body>
+</html>
